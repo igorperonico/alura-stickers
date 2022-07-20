@@ -1,4 +1,6 @@
+import java.io.InputStream;
 import java.net.URI;
+import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -39,9 +41,22 @@ public class App {
         // System.out.println(listDeFilmes.get(0));
 
         // exibir e manipular os dados
+        // e agora vai criar uma figurinha para cada poster de filme na API
+
+        var geradora = new GeradoraDeFigurinhas();
 
         for (Map<String,String> filme : listDeFilmes) {
         System.out.println("\u001b[1mTítulo:\u001b[m " + filme.get("title"));
+
+            String urlImagem = filme.get("image");
+            String titulo = filme.get("title");
+
+            InputStream inputStream = new URL(urlImagem).openStream();
+            String nomeArquivo = titulo.replace(":", " -") + ".png";
+            String imDbRating = filme.get("imDbRating");
+
+            geradora.cria(inputStream, nomeArquivo, imDbRating);
+
             System.out.println("\u001b[1mPoster:\u001b[m " + filme.get("image"));
             System.out.println("\u001b[45;1m \u001b[37;1mClassificação: " + filme.get("imDbRating") + " \u001b[m");
             // System.out.println("⭐⭐⭐⭐\u2B50\n");
