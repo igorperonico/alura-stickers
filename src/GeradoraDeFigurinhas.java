@@ -9,7 +9,7 @@ import java.awt.Font;
 
 public class GeradoraDeFigurinhas {
 
-    public void cria(InputStream inputStream, String nomeArquivo, String imDbRating) throws Exception {
+    public void cria(InputStream inputStream, String nomeArquivo) throws Exception {
         // leitura da imagem
         // InputStream inputStream = new FileInputStream(new File("entrada/filme.jpg"));
         // InputStream inputStream = new URL("https://imersao-java-apis.s3.amazonaws.com/TopMovies_2.jpg").openStream();
@@ -22,7 +22,7 @@ public class GeradoraDeFigurinhas {
         BufferedImage novaImagem = new BufferedImage(largura, novaAltura, BufferedImage.TRANSLUCENT);
 
         // copiar a imagem original pra nova imagem(em memória)
-        Graphics2D graphics = (Graphics2D)novaImagem.getGraphics();
+        Graphics2D graphics = (Graphics2D) novaImagem.getGraphics();
         graphics.drawImage(imagemOriginal, 0, 0, null);
 
         // configurar a fonte
@@ -31,7 +31,7 @@ public class GeradoraDeFigurinhas {
         graphics.setFont(fonte);
 
         // escrever uma frase na nova imagem
-        graphics.drawString("Classificação: " + imDbRating, largura/4, novaAltura - 50);
+        graphics.drawString("MUITO BOM!", largura/4, novaAltura - 50);
 
         // escrever a nova imagem em um arquivo
         ImageIO.write(novaImagem, "png", new File("saida/" + nomeArquivo));
